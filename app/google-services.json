@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "940456631098",
+    "project_id": "levelapp-c7ea6",
+    "storage_bucket": "levelapp-c7ea6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940456631098:android:91873088dc0449b43ece03",
+        "android_client_info": {
+          "package_name": "cite.app.levelapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "940456631098-5n2sdpd02sgmun7b99qpmlmk7ilmhoke.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVfCFcF5BlWzS1XzwQkKaulzPjG-nPk4o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "940456631098-5n2sdpd02sgmun7b99qpmlmk7ilmhoke.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

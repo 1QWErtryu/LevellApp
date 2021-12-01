@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cite.app.levelapp">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.LevelApp">
+        <activity android:name=".HardMobiledev"></activity>
+        <activity android:name=".MedMobiledev" />
+        <activity android:name=".EasyMobiledev" />
+        <activity android:name=".Hardim" />
+        <activity android:name=".Medim" />
+        <activity android:name=".Easyim" />
+        <activity android:name=".HardNetworking" />
+        <activity android:name=".MedNetworking" />
+        <activity android:name=".EasyNetworking" />
+        <activity android:name=".HardWebDev" />
+        <activity android:name=".MedWebDev" />
+        <activity android:name=".EasyWebDev" />
+        <activity android:name=".Harddatabase" />
+        <activity android:name=".Meddatabase" />
+        <activity android:name=".webdevEasy" />
+        <activity android:name=".databaseHard" />
+        <activity android:name=".WonActivity" />
+        <activity android:name=".databaseMed" />
+        <activity android:name=".databaseEasy" />
+        <activity android:name=".MobileDevBtn" />
+        <activity android:name=".imBtn" />
+        <activity android:name=".WebdevBtn" />
+        <activity android:name=".Networking" />
+        <activity android:name=".DatabaseBtn" />
+        <activity android:name=".ForgotPasswordActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".StartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+    </application>
+
+</manifest>

@@ -1,0 +1,257 @@
+package cite.app.levelapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
+import android.app.Dialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.sasank.roundedhorizontalprogress.RoundedHorizontalProgressBar;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Harddatabase extends AppCompatActivity {
+    public static ArrayList<Modelclass> list;
+
+
+    CountDownTimer countDownTimer;
+    int timerValue=20;
+    RoundedHorizontalProgressBar progressBar;
+
+    List<Modelclass> allQuestionsList;
+    Modelclass modelClass;
+    int index=0;
+    TextView card_question,optiona,optionb,optionc,optiond;
+    CardView cardOA,cardOB,cardOC,cardOD;
+    int correctCount= 0;
+    int wrongCount= 0;
+    LinearLayout nxtBtn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate ( savedInstanceState );
+        setContentView ( R.layout.activity_harddatabase );
+
+        list=new ArrayList<>();
+        list.add(new Modelclass("Data Manipulation Language (DML) is not to","Create information table in the Database","Create information table in the Database","Deletion of information in the Database","Modification of information in the Database","Create information table in the Database"));
+        list.add(new Modelclass("In precedence of set operators the expression is evaluated from:","Left to Left","Left to Right","Right to Right","Right to Left","Left to Right"));
+        list.add(new Modelclass("The minimal set of super key is called","Primary key","Secondary key","Candidate key","Foreign Key","Candidate key"));
+        list.add(new Modelclass("A type of query that is placed within a WHERE or HAVING clause of another query is called","Super query","Sub query","Master query","Multi-query","Super query"));
+        list.add(new Modelclass("In SQL, which command is used to remove a stored function from the database?","REMOVE FUNCTION","DELETE FUNCTION","DROP FUNCTION","ERASE FUNCTION","DROP FUNCTION"));
+        list.add(new Modelclass("The model for a _______ resembles the hierarchical model in many respects.","Network database","Relational database","Distributed database","Hierarchical database","Network database"));
+        list.add(new Modelclass("In SQL, which command(s) is(are) used to enable/disable a database trigger?","ALTER TRIGGER","ALTER DATABASE","ALTER TABLE","MODIFY TRIGGER","ALTER TRIGGER"));
+        list.add(new Modelclass("What do you mean by one to many relationship between Teacher and Class table?","One class may have many teachers","One teacher can have many classes","Many classes may have many teachers","Many teachers may have many classes","One teacher can have many classes"));
+        list.add(new Modelclass("In one-to-many relationship the table on 'many' side is called _______","Parent","Child","Sister","Master","Parent"));
+        list.add(new Modelclass("The values appearing in given attributes of any tuple in the referencing relation must likewise occur in specified attributes of at least one tuple in the referenced relation, according to _____________________ integrity constraint.","Referential","Primary","Referencing","Specific","Referential"));
+
+        Hooks();
+        allQuestionsList = list;
+        Collections.shuffle(allQuestionsList);
+        modelClass = list.get(index);
+
+        cardOA.setBackgroundColor(getResources().getColor(R.color.white));
+        cardOB.setBackgroundColor(getResources().getColor(R.color.white));
+        cardOC.setBackgroundColor(getResources().getColor(R.color.white));
+        cardOD.setBackgroundColor(getResources().getColor(R.color.white));
+
+        nxtBtn.setClickable(false);
+
+        countDownTimer = new CountDownTimer(20000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timerValue = timerValue-1;
+                progressBar.setProgress(timerValue);
+            }
+
+            @Override
+            public void onFinish() {
+                Dialog dialog = new Dialog(Harddatabase.this);
+                dialog.setContentView(R.layout.time_out_dialog);
+
+                dialog.findViewById(R.id.btn_tryAgain).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Harddatabase.this,DatabaseBtn.class);
+                        startActivity(intent);
+                    }
+                });
+
+                dialog.show();
+            }
+        }.start();
+
+        setAllData();
+    }
+
+    private void setAllData() {
+        card_question.setText(modelClass.getQuestion());
+        optiona.setText(modelClass.getoA());
+        optionb.setText(modelClass.getoB());
+        optionc.setText(modelClass.getoC());
+        optiond.setText(modelClass.getoD());
+        timerValue = 20;
+        countDownTimer.cancel();
+        countDownTimer.start();
+    }
+
+    private void Hooks() {
+        progressBar=findViewById(R.id.quiz_timer);
+        card_question=findViewById(R.id.card_question);
+        optiona=findViewById(R.id.card_optiona);
+        optionb=findViewById(R.id.card_optionb);
+        optionc=findViewById(R.id.card_optionc);
+        optiond=findViewById(R.id.card_optiond);
+
+        cardOA=findViewById(R.id.cardOA);
+        cardOB=findViewById(R.id.cardOB);
+        cardOC=findViewById(R.id.cardOC);
+        cardOD=findViewById(R.id.cardOD);
+
+        nxtBtn=findViewById(R.id.nxtBtn);
+
+    }
+
+    public void Correct(CardView cardView){
+
+        cardView.setBackgroundColor(getResources().getColor(R.color.green));
+
+        nxtBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                correctCount++;
+                index++;
+                modelClass=list.get(index);
+                resetColor();
+                setAllData();
+                enableButton();
+            }
+        });
+
+
+    }
+
+    public void Wrong(CardView cardOA){
+
+        cardOA.setBackgroundColor(getResources().getColor(R.color.red));
+
+        nxtBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wrongCount++;
+                if (index < list.size() - 1){
+                    index++;
+                    modelClass = list.get(index);
+                    resetColor();
+                    setAllData();
+                    enableButton();
+                }else {
+                    GameWon();
+                }
+            }
+        });
+
+
+    }
+
+    private void GameWon() {
+
+        Intent intent = new Intent(Harddatabase.this,WonActivity.class);
+        intent.putExtra("Correct",correctCount);
+        intent.putExtra("Wrong",wrongCount);
+        startActivity(intent);
+    }
+
+    public void enableButton(){
+        cardOA.setClickable(true);
+        cardOB.setClickable(true);
+        cardOC.setClickable(true);
+        cardOD.setClickable(true);
+    }
+
+    public void disableButton(){
+        cardOA.setClickable(false);
+        cardOB.setClickable(false);
+        cardOC.setClickable(false);
+        cardOD.setClickable(false);
+    }
+
+    public void resetColor(){
+        cardOA.setBackgroundColor(getResources().getColor(R.color.white));
+        cardOB.setBackgroundColor(getResources().getColor(R.color.white));
+        cardOC.setBackgroundColor(getResources().getColor(R.color.white));
+        cardOD.setBackgroundColor(getResources().getColor(R.color.white));
+    }
+
+
+
+    public void OptionAClick(View view){
+        disableButton();
+        nxtBtn.setClickable(true);
+        if(modelClass.getoA().equals(modelClass.getAns())){
+            cardOA.setCardBackgroundColor(getResources().getColor(R.color.green));
+
+            if(index < list.size() - 1){
+                Correct(cardOA);
+            }else {
+                GameWon();
+            }
+        }else {
+            Wrong(cardOA);
+        }
+    }
+
+    public void OptionBClick(View view){
+        disableButton();
+        nxtBtn.setClickable(true);
+        if(modelClass.getoB().equals(modelClass.getAns())){
+            cardOB.setCardBackgroundColor(getResources().getColor(R.color.green));
+
+            if(index < list.size() - 1){
+                Correct(cardOB);
+            }else {
+                GameWon();
+            }
+        }else {
+            Wrong(cardOB);
+        }
+    }
+
+    public void OptionCClick(View view){
+        disableButton();
+        nxtBtn.setClickable(true);
+        if(modelClass.getoC().equals(modelClass.getAns())){
+            cardOC.setCardBackgroundColor(getResources().getColor(R.color.green));
+
+            if(index < list.size() - 1){
+                Correct(cardOC);
+            }else {
+                GameWon();
+            }
+        }else {
+            Wrong(cardOC);
+        }
+    }
+
+    public void OptionDClick(View view){
+        disableButton();
+        nxtBtn.setClickable(true);
+        if(modelClass.getoD().equals(modelClass.getAns())){
+            cardOD.setCardBackgroundColor(getResources().getColor(R.color.green));
+
+            if(index < list.size() - 1){
+                Correct(cardOD);
+            }else {
+                GameWon();
+            }
+        }else {
+            Wrong(cardOD);
+        }
+    }
+}

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DADDFC"
+    tools:context=".StartActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/banner"
+        android:padding="10dp"
+        android:background="#2E4C6D"
+        android:layout_marginTop="100dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="40dp"
+            android:id="@+id/imgLogo"
+            android:src="@drawable/levelappicon"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LEVEL APP"
+            android:layout_toRightOf="@+id/imgLogo"
+            android:layout_marginLeft="50dp"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:padding="15dp"
+            android:textStyle="bold"
+            android:background="@drawable/white_thin_bg"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/banner"
+        android:layout_marginTop="50dp"
+        android:id="@+id/note_layout"
+        android:background="@drawable/dark_thin_bg"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="#2E4C6D"
+            android:text="Note:"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#2E4C6D"
+            android:padding="10dp"
+            android:text="This App is intended for 1st and 2nd year BSIT. But if you want to experience this app, feel free to use."/>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@null"
+        android:layout_below="@+id/note_layout"
+        android:background="@drawable/btn_bg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:onClick="ClickStart"
+        android:text="Start"
+        />
+
+</RelativeLayout>
